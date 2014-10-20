@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "audio-vs1053b-textspeech",
   "version": "1.0.0",
   "description": "Text-to-Speech module for tessel audio module (vs1053b)",

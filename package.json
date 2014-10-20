@@ -5,10 +5,14 @@
   "description": "Text-to-Speech module for tessel audio module (vs1053b)",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "tessel run sample.js"
   },
   "keywords": [
-    "tessel"
+    "tessel",
+    "audio",
+    "sound",
+    "speech",
+    "vs1053b"
   ],
   "author": "Sho Hashimoto <hashimoto@shokai.org>",
   "license": "MIT",

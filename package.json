@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "audio-vs1053b-textspeech",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Text-to-Speech module for tessel audio module (vs1053b)",
-  "main": "lib/tessel-speech.js",
+  "main": "index.js",
   "scripts": {
     "test": "grunt test"
   },
@@ -16,12 +16,7 @@
     "request": "*"
   },
   "devDependencies": {
-    "coffee-script": "^1.8",
-    "grunt": "*",
-    "grunt-cli": "*",
-    "grunt-notify": "*",
-    "grunt-contrib-coffee": "*",
-    "grunt-coffeelint": "*",
-    "grunt-contrib-watch": "*"
+    "audio-vs1053b": "*",
+    "wifi-cc3000": "*"
   }
 }

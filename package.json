@@ -16,12 +16,9 @@
     "request": "*"
   },
   "devDependencies": {
-    "coffee-errors": "*",
     "coffee-script": "^1.8",
-    "mocha": "*",
     "grunt": "*",
     "grunt-cli": "*",
-    "grunt-simple-mocha": "*",
     "grunt-notify": "*",
     "grunt-contrib-coffee": "*",
     "grunt-coffeelint": "*",

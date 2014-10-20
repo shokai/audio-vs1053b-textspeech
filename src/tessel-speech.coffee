@@ -14,7 +14,10 @@ module.exports =
       headers:
         'User-Agent': 'Safari/1.0'
 
-  speech: (text, opts={tl: 'ja'}) ->
+  speech: (text, opts={tl: 'ja'}, callback = ->) ->
+    if typeof opts is 'function'
+      callback = opts
+      opts = {tl: 'ja'}
     opts.q = text
 
     buf = new Buffer 10240
@@ -31,3 +34,4 @@ module.exports =
     req.pipe ws
     req.on 'end', ->
       audio.play buf
+      callback()

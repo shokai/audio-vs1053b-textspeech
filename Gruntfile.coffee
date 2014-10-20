@@ -2,16 +2,12 @@
 
 module.exports = (grunt) ->
 
-  require 'coffee-errors'
-
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-coffeelint'
-  grunt.loadNpmTasks 'grunt-simple-mocha'
   grunt.loadNpmTasks 'grunt-notify'
 
   grunt.registerTask 'build',   [ 'coffeelint', 'coffee' ]
-  grunt.registerTask 'test',    [ 'build', 'simplemocha' ]
   grunt.registerTask 'default', [ 'build', 'watch' ]
 
   grunt.initConfig
@@ -44,15 +40,6 @@ module.exports = (grunt) ->
           dest: 'lib/'
           ext: '.js'
         }]
-
-    simplemocha:
-      options:
-        ui: 'bdd'
-        reporter: 'spec'
-        compilers: 'coffee:coffee-script'
-        ignoreLeaks: no
-      dist:
-        src: [ 'tests/test_*.coffee' ]
 
     watch:
       options:

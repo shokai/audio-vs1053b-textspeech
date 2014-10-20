@@ -1,6 +1,8 @@
 var tessel = require('tessel');
 var wifi = require('wifi-cc3000');
 var audio = require('audio-vs1053b').use(tessel.port['A']);
+
+// var textspeech = require('audio-vs1053b-textspeech').use(audio);
 var textspeech = require('./').use(audio);
 
 var led_green = tessel.led[0].output(1);

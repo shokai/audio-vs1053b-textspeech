@@ -2,13 +2,28 @@
   "name": "audio-vs1053b-textspeech",
   "version": "1.0.0",
   "description": "Text-to-Speech module for tessel audio module (vs1053b)",
-  "main": "index.js",
+  "main": "lib/tessel-speech.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "keywords": [
     "tessel"
   ],
   "author": "Sho Hashimoto <hashimoto@shokai.org>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "request": "*"
+  },
+  "devDependencies": {
+    "coffee-errors": "*",
+    "coffee-script": "^1.8",
+    "mocha": "*",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-simple-mocha": "*",
+    "grunt-notify": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-coffeelint": "*",
+    "grunt-contrib-watch": "*"
+  }
 }

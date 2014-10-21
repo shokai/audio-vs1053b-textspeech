@@ -17,9 +17,7 @@
   "author": "Sho Hashimoto <hashimoto@shokai.org>",
   "license": "MIT",
   "dependencies": {
-    "request": "*"
-  },
-  "devDependencies": {
+    "request": "*",
     "audio-vs1053b": "*",
     "wifi-cc3000": "*"
   }

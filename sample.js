@@ -19,10 +19,8 @@ audio.on('ready', function(){
 
 audio.on('ready:volume', function(){
   console.log('audio ready:volume');
-  if(err){
-    console.error(err);
-    return;
-  }
+  textspeech.speech('speech start', {tl: 'en'});
+
   setInterval(function(){
     textspeech.speech('hello world', {tl: 'en'}, function(err){
       if(err) console.error(err);

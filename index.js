@@ -18,17 +18,18 @@ module.exports = {
       }
     });
   },
-  speech: function(text, opts, callback){
-    if(typeof opts === 'function'){
-      callback = opts;
-      opts = {tl: 'ja'};
-    }
-    if(opts == null) opts = { tl: 'ja' };
+  speech: function(){
+    var text, opts, callback; // arguments
+    var args = Array.prototype.slice.call(arguments);
+    if(typeof args[args.length-1] === 'function') callback = args.pop();
+    text = args.shift();
+    opts = args.shift() || {tl: 'ja'};
+    opts.q = text;
     if(!wifi.isConnected()){
       if(typeof callback === 'function') callback('wifi is not connected');
       return;
     }
-    opts.q = text;
+
     var buf = new Buffer(10240);
     var offset = 0;
     var ws = stream.Writable({decodeStrings: false});

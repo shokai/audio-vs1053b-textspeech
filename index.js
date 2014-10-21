@@ -5,11 +5,11 @@ var request = require('request');
 var wifi = require('wifi-cc3000');
 
 module.exports = {
-  use: function(audio) {
+  use: function(audio){
     this.audio = audio;
     return this;
   },
-  getAudioStream: function(query) {
+  getAudioStream: function(query){
     return request.get({
       uri: 'http://translate.google.com/translate_tts',
       qs: query,
@@ -18,12 +18,12 @@ module.exports = {
       }
     });
   },
-  speech: function(text, opts, callback) {
-    if (typeof opts === 'function'){
+  speech: function(text, opts, callback){
+    if(typeof opts === 'function'){
       callback = opts;
       opts = {tl: 'ja'};
     }
-    if (opts == null) opts = { tl: 'ja' };
+    if(opts == null) opts = { tl: 'ja' };
     if(!wifi.isConnected()){
       if(typeof callback === 'function') callback('wifi is not connected');
       return;
@@ -32,8 +32,8 @@ module.exports = {
     var buf = new Buffer(10240);
     var offset = 0;
     var ws = stream.Writable({decodeStrings: false});
-    ws._write = function(chunk, enc, next) {
-      if (chunk.length > buf.length - offset) {
+    ws._write = function(chunk, enc, next){
+      if(chunk.length > buf.length - offset){
         return next(new Error('buffer over'));
       }
       buf.write(chunk, offset, buf.length - offset);
@@ -43,7 +43,7 @@ module.exports = {
     var req = this.getAudioStream(opts);
     req.pipe(ws);
     var self = this;
-    req.on('end', function() {
+    req.on('end', function(){
       self.audio.play(buf, callback);
     });
   }

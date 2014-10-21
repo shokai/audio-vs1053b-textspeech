@@ -2,6 +2,7 @@
 
 var stream = require('stream');
 var request = require('request');
+var wifi = require('wifi-cc3000');
 
 module.exports = {
   use: function(audio) {
@@ -23,6 +24,10 @@ module.exports = {
       opts = {tl: 'ja'};
     }
     if (opts == null) opts = { tl: 'ja' };
+    if(!wifi.isConnected()){
+      if(typeof callback === 'function') callback('wifi is not connected');
+      return;
+    }
     opts.q = text;
     var buf = new Buffer(10240);
     var offset = 0;

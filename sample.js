@@ -1,5 +1,4 @@
 var tessel = require('tessel');
-var wifi = require('wifi-cc3000');
 var audio = require('audio-vs1053b').use(tessel.port['A']);
 
 // var textspeech = require('audio-vs1053b-textspeech').use(audio);
@@ -25,11 +24,9 @@ audio.on('ready:volume', function(){
     return;
   }
   setInterval(function(){
-    if(wifi.isConnected()){
-      textspeech.speech('hello world', {tl: 'en'}, function(err){
-        if(err) console.error(err);
-        else console.log('done');
-      });
-    }
+    textspeech.speech('hello world', {tl: 'en'}, function(err){
+      if(err) console.error(err);
+      else console.log('done');
+    });
   }, 30*1000);
 });

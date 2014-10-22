@@ -30,6 +30,7 @@ var cache = {
 };
 
 module.exports = {
+  playing: false,
   use: function(audio){
     this.audio = audio;
     return this;
@@ -47,15 +48,24 @@ module.exports = {
     });
   },
   speech: function(){
+    var self = this;
     var text, opts, callback; // arguments
     var args = Array.prototype.slice.call(arguments);
     if(typeof args[args.length-1] === 'function') callback = args.pop();
     text = args.shift();
     opts = args.shift() || {tl: 'ja'};
     opts.q = text;
+    if(this.playing){
+      if(callback) callback('playing '+this.playing);
+      return;
+    }
     var cached_mp3;
     if(cached_mp3 = cache.get(text)){
-      this.audio.play(cached_mp3, callback);
+      this.playing = text;
+      this.audio.play(cached_mp3, function(err){
+        self.playing = false;
+        if(callback) callback(err);
+      });
       return;
     }
     if(!wifi.isConnected()){
@@ -63,6 +73,7 @@ module.exports = {
       return;
     }
 
+    this.playing = text;
     var buf = new Buffer(10240);
     var offset = 0;
     var ws = stream.Writable({decodeStrings: false});
@@ -76,10 +87,12 @@ module.exports = {
     };
     var req = this.getAudioStream(opts);
     req.pipe(ws);
-    var self = this;
     req.on('end', function(){
       cache.set(text, buf);
-      self.audio.play(buf, callback);
+      self.audio.play(buf, function(err){
+        self.playing = false;
+        if(callback) callback(err);
+      });
     });
   }
 };

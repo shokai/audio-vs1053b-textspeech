@@ -32,7 +32,11 @@ textspeech.setCacheSize(5); // default is 3
 ## Sample
 
     % npm install
+
+
     % tessel run sample.js
+    # or
+    % npm test
 
 
 Contributing

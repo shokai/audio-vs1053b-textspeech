@@ -1,3 +1,8 @@
+=== 0.0.3 2014-10-22
+
+* cache mp3 data  #1
+* add method - setCacheSize(num)  #1
+
 === 0.0.2 2014-10-22
 
 * check wifi status before HTTP request

@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "audio-vs1053b-textspeech",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Text-to-Speech module for tessel audio module (vs1053b), using mp3 from Google translate.",
   "main": "index.js",
   "scripts": {

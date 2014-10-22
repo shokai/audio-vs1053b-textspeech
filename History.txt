@@ -1,3 +1,8 @@
+=== 0.0.2 2014-10-22
+
+* check wifi status before HTTP request
+* fix npm deps
+
 === 0.0.1 2014-10-21
 
 * first release

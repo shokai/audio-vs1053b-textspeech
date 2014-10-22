@@ -24,6 +24,10 @@ textspeech.speech('こんにちは'); // japanese
 textspeech.speech('hello world', {tl: 'en'}); // english
 ```
 
+set mp3 data cache size
+```javascript
+textspeech.setCacheSize(5); // default is 3
+```
 
 ## Sample
 

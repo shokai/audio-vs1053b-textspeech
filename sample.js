@@ -26,5 +26,5 @@ audio.on('ready:volume', function(){
       if(err) console.error(err);
       else console.log('done');
     });
-  }, 30*1000);
+  }, 15*1000);
 });

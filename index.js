@@ -4,10 +4,38 @@ var stream = require('stream');
 var request = require('request');
 var wifi = require('wifi-cc3000');
 
+var cache = {
+  data: {},
+  maxSize: 3,
+  size: function(){
+    return Object.keys(this.data).length;
+  },
+  set: function(key,value){
+    this.data[key] = {value: value, date: Date.now()};
+    this.gc();
+    return value;
+  },
+  get: function(key){
+    if(this.data.hasOwnProperty(key)) return this.data[key].value;
+    return null;
+  },
+  gc: function(){
+    if(this.maxSize >= this.size()) return;
+    var self = this;
+    var old_key = Object.keys(this.data).sort(function(a,b){
+      return self.data[a].date - self.data[b].date;
+    })[0];
+    this.data[old_key] = null;
+  }
+};
+
 module.exports = {
   use: function(audio){
     this.audio = audio;
     return this;
+  },
+  setCacheSize: function(size){
+    cache.maxSize = size;
   },
   getAudioStream: function(query){
     return request.get({
@@ -25,6 +53,11 @@ module.exports = {
     text = args.shift();
     opts = args.shift() || {tl: 'ja'};
     opts.q = text;
+    var cached_mp3;
+    if(cached_mp3 = cache.get(text)){
+      this.audio.play(cached_mp3, callback);
+      return;
+    }
     if(!wifi.isConnected()){
       if(typeof callback === 'function') callback('wifi is not connected');
       return;
@@ -45,6 +78,7 @@ module.exports = {
     req.pipe(ws);
     var self = this;
     req.on('end', function(){
+      cache.set(text, buf);
       self.audio.play(buf, callback);
     });
   }
